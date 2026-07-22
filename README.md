@@ -67,6 +67,7 @@ Power BI Dashboard
 The project implements a Star Schema consisting of one Fact Table and three Dimension Tables.
 
 ```
+<img src="docs/Data Model.png" width="900">
 <img width="1140" height="713" alt="Data Model" src="https://github.com/user-attachments/assets/4cede0c4-6be7-4f8d-9afc-554f9c7fb027" />
 
 <img width="1140" height="713" alt="Data Model" src="https://github.com/user-attachments/assets/e9d6b8a9-dd44-4a36-b3c3-48b84b5bd624" />
