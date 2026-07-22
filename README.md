@@ -1,10 +1,10 @@
-# 🚦 Traffic Analytics Pipeline
+# Traffic Analytics Pipeline
 
 An end-to-end **Computer Vision**, **Data Engineering**, and **Business Intelligence** project that detects and tracks vehicles from traffic videos using **YOLO11** and **ByteTrack**, transforms detection results through an automated **ETL Pipeline**, stores them in a **PostgreSQL Star Schema Data Warehouse**, and visualizes traffic insights using **Power BI**.
 
 ---
 
-## 📌 Project Overview
+## Project Overview
 
 This project demonstrates a complete analytics pipeline starting from raw traffic videos to interactive business dashboards.
 
@@ -32,22 +32,8 @@ The purpose of this project is to demonstrate technical implementation rather th
 
 ---
 
-# 🛠 Tech Stack
 
-| Category | Technologies |
-|------------|------------------------------|
-| Programming | Python |
-| Computer Vision | YOLO11, ByteTrack, OpenCV |
-| Data Processing | Pandas |
-| Database | PostgreSQL (Supabase) |
-| ORM | SQLAlchemy |
-| Data Warehouse | Star Schema |
-| Visualization | Power BI |
-| Version Control | Git & GitHub |
-
----
-
-# 🏗 System Architecture
+#  System Architecture
 
 ```
 Traffic Video
@@ -76,15 +62,13 @@ Power BI Dashboard
 
 ---
 
-# ⭐ Data Warehouse
+# Data Warehouse
 
 The project implements a Star Schema consisting of one Fact Table and three Dimension Tables.
 
 ```
-                    Dim_Time
-                        │
-                        │
-Dim_Camera ─── Fact_Traffic ─── Dim_Vehicle
+<img width="1197" height="672" alt="Main Dashboard" src="https://github.com/user-attachments/assets/7481738f-ff26-4d15-b074-025884ca1b26" />
+
 ```
 
 ### Fact Table
@@ -99,7 +83,7 @@ Dim_Camera ─── Fact_Traffic ─── Dim_Vehicle
 
 ---
 
-# 📂 Project Structure
+# Project Structure
 
 ```
 trafficanalytics/
@@ -130,7 +114,7 @@ trafficanalytics/
 
 ---
 
-# 📹 Pipeline Components
+# Pipeline Components
 
 ## 1. Vehicle Detection
 
@@ -157,10 +141,10 @@ Aggregates detection results into traffic counts.
 
 Example:
 
-| Time | Camera | Vehicle | Count |
-|-------|----------|------------|-------|
-|08:00|Camera 01|Car|52|
-|08:00|Camera 01|Motorcycle|183|
+| fact_id | time_id | vehicle_id | camera_id |vehicle_count |
+|-------|----------|------------|-------|---------------|
+|1|1|1|1|16|
+|2|134|2|2|16|
 
 ---
 
@@ -196,12 +180,13 @@ SQL queries answer business questions such as:
 
 ---
 
-# 📊 Power BI Dashboard
+# Power BI Dashboard
 
 ## Main Dashboard
 
 ```
-docs/Main Dashboard.png
+<img width="1197" height="672" alt="Main Dashboard" src="https://github.com/user-attachments/assets/54f6a1f6-5e2b-417c-aea4-c4331f240b53" />
+
 ```
 
 Features:
@@ -219,33 +204,21 @@ Features:
 ## Road Detail Dashboard
 
 ```
-docs/Drill Trough Dashboard.png
+<img width="1203" height="677" alt="Drill Trough Dashboard" src="https://github.com/user-attachments/assets/7e5271a8-43fb-4b24-afcb-bf788d5fac98" />
+
 ```
 
 Features
 
 - Road-specific analysis
 - Hourly trend
+- Daily Trend
 - Vehicle composition
 - Raw transaction table
 
 ---
 
-# 📈 Dashboard KPIs
-
-The dashboard displays:
-
-- Total Traffic Volume
-- Average Traffic
-- Total Cameras
-- Vehicle Categories
-- Peak Hour
-- Busiest Road
-- Dominant Vehicle Type
-
----
-
-# 💡 Key Insights
+# Key Insights
 
 > **The following insights are generated from dummy/simulated data and are intended to demonstrate analytical capabilities.**
 
@@ -279,7 +252,7 @@ Passenger vehicles (Cars and Motorcycles) account for over **90%** of total dete
 
 ---
 
-# 🔍 Business Questions
+# Business Questions
 
 This dashboard helps answer questions such as:
 
@@ -291,14 +264,14 @@ This dashboard helps answer questions such as:
 
 ---
 
-# 📦 Installation
+# Installation
 
 Clone the repository
 
 ```bash
-git clone https://github.com/yourusername/TrafficAnalyticsPipeline.git
+[git clone https://github.com/dzakmu/traffic_analytics.git]
 
-cd TrafficAnalyticsPipeline
+cd traffic_analytics
 ```
 
 Install dependencies
@@ -321,7 +294,7 @@ python src/main.py
 
 ---
 
-# 📁 Output
+# Output
 
 The pipeline generates:
 
@@ -343,7 +316,7 @@ Power BI Dashboard
 
 ---
 
-# 🚀 Future Improvements
+# Future Improvements
 
 - Real-time video stream processing
 - Apache Kafka integration
@@ -356,7 +329,7 @@ Power BI Dashboard
 
 ---
 
-# 👨‍💻 Author
+# Author
 
 **Muhammad Dzaky Mu'ammar**
 
@@ -368,10 +341,7 @@ GitHub:
 https://github.com/dzakmu
 
 LinkedIn:
-(Add your LinkedIn)
+Muhammad Dzaky Mu'ammar
 
 ---
 
-# 📄 License
-
-This project is licensed under the MIT License.
