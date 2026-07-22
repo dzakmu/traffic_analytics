@@ -11,11 +11,12 @@ env.bak/
 venv.bak/
 
 # Project specific
-data/raw/*.mp4
-data/processed/*.csv
-outputs/*.mp4
-outputs/*.avi
-outputs/*.sql
+data/raw/**/*.mp4
+data/raw/**/*.avi
+data/processed/**/*.csv
+outputs/**/*.mp4
+outputs/**/*.avi
+outputs/**/*.sql
 *.pt
 
 # Environment variables
