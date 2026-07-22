@@ -1,70 +1,377 @@
-# Traffic Analytics Pipeline
+# 🚦 Traffic Analytics Pipeline
 
-## Project Overview
-This project implements a Traffic Analytics Pipeline that processes traffic video footage to detect and track vehicles, aggregates the traffic data, and loads it into a Data Warehouse (Star Schema in PostgreSQL) ready for analytics and Power BI dashboards.
+An end-to-end **Computer Vision**, **Data Engineering**, and **Business Intelligence** project that detects and tracks vehicles from traffic videos using **YOLO11** and **ByteTrack**, transforms detection results through an automated **ETL Pipeline**, stores them in a **PostgreSQL Star Schema Data Warehouse**, and visualizes traffic insights using **Power BI**.
 
-## Architecture
-The pipeline consists of the following components:
-1. **Vehicle Detection (`src/vehicle_detection.py`)**: Uses YOLO11n and ByteTrack to detect and track vehicles in video.
-2. **Traffic Aggregation (`src/etl.py`)**: Aggregates raw detections into traffic counts per minute.
-3. **ETL Pipeline (`src/etl.py`)**: Extracts the aggregated data, transforms it by adding time/location dimensions, and loads it into a PostgreSQL Database.
-4. **Data Warehouse (`src/warehouse.py`)**: A Star Schema implemented in PostgreSQL containing `fact_traffic`, `dim_time`, `dim_vehicle`, and `dim_camera`.
-5. **Analytics (`src/analytics.py`)**: SQL queries to answer business questions (Peak hours, Vehicle types, etc.).
+---
 
-## Directory Structure
+## 📌 Project Overview
+
+This project demonstrates a complete analytics pipeline starting from raw traffic videos to interactive business dashboards.
+
+The pipeline consists of:
+
+- Vehicle Detection using YOLO11
+- Multi-object Tracking using ByteTrack
+- Traffic Aggregation
+- ETL Pipeline
+- PostgreSQL Data Warehouse
+- SQL Analytics
+- Interactive Power BI Dashboard
+
+The objective is to demonstrate an end-to-end workflow commonly used in modern AI and Data Engineering projects.
+
+---
+
+# ⚠ Disclaimer
+
+> **This project is intended for educational and portfolio purposes only.**
+
+Although the vehicle detection pipeline is implemented using **YOLO11** and **ByteTrack**, the traffic aggregation, road names, camera locations, dashboard metrics, and analytical results are generated from **dummy/simulated data**.
+
+The purpose of this project is to demonstrate technical implementation rather than represent actual traffic conditions.
+
+---
+
+# 🛠 Tech Stack
+
+| Category | Technologies |
+|------------|------------------------------|
+| Programming | Python |
+| Computer Vision | YOLO11, ByteTrack, OpenCV |
+| Data Processing | Pandas |
+| Database | PostgreSQL (Supabase) |
+| ORM | SQLAlchemy |
+| Data Warehouse | Star Schema |
+| Visualization | Power BI |
+| Version Control | Git & GitHub |
+
+---
+
+# 🏗 System Architecture
+
+```
+Traffic Video
+      │
+      ▼
+YOLO11 Vehicle Detection
+      │
+      ▼
+ByteTrack Vehicle Tracking
+      │
+      ▼
+Detection CSV
+      │
+      ▼
+ETL Pipeline
+      │
+      ▼
+PostgreSQL Data Warehouse
+      │
+      ▼
+SQL Analytics
+      │
+      ▼
+Power BI Dashboard
+```
+
+---
+
+# ⭐ Data Warehouse
+
+The project implements a Star Schema consisting of one Fact Table and three Dimension Tables.
+
+```
+                    Dim_Time
+                        │
+                        │
+Dim_Camera ─── Fact_Traffic ─── Dim_Vehicle
+```
+
+### Fact Table
+
+- fact_traffic
+
+### Dimension Tables
+
+- dim_time
+- dim_camera
+- dim_vehicle
+
+---
+
+# 📂 Project Structure
+
 ```
 trafficanalytics/
 ├── data/
-│   ├── processed/         # Intermediate CSV files containing detections
-│   └── raw/               # Input traffic video (.mp4)
-├── outputs/               # Annotated videos and analytics results (.sql)
+│   ├── processed/
+│   └── raw/
+│
+├── docs/
+│   ├── Data Model.png
+│   ├── Drill Trough Dashboard.png
+│   ├── Main Dashboard.png
+│
+├── outputs/
+│   ├── annotated_video.mp4
+│   └── analytics_results.sql
+│
 ├── src/
-│   ├── analytics.py       # SQL Analytics scripts
-│   ├── config.py          # Project configuration
-│   ├── etl.py             # Extract, Transform, Load processes
-│   ├── main.py            # Main pipeline script
-│   ├── vehicle_detection.py # YOLO and ByteTrack logic
-│   └── warehouse.py       # Data Warehouse creation logic
-├── requirements.txt       # Project dependencies
-└── README.md              # Project documentation
+│   ├── analytics.py
+│   ├── config.py
+│   ├── etl.py
+│   ├── main.py
+│   ├── vehicle_detection.py
+│   └── warehouse.py
+│
+├── requirements.txt
+└── README.md
 ```
 
-## Dataset
-- **Input**: Traffic videos placed in `data/raw/` (e.g. `sample_traffic.mp4`)
-- **Intermediate**: CSV files stored in `data/processed/`
-- **Output**: 
-  - PostgreSQL database (Supabase)
-  - Annotated videos: `outputs/annotated_*.mp4`
-  - Analytics results: `outputs/analytics_results.sql`
+---
 
-## Installation
-1. Install the required dependencies:
+# 📹 Pipeline Components
+
+## 1. Vehicle Detection
+
+Detects vehicles from traffic videos using **YOLO11**.
+
+Supported classes:
+
+- Car
+- Motorcycle
+- Truck
+- Bus
+
+---
+
+## 2. Vehicle Tracking
+
+Tracks detected vehicles using **ByteTrack** to avoid duplicate counting.
+
+---
+
+## 3. Traffic Aggregation
+
+Aggregates detection results into traffic counts.
+
+Example:
+
+| Time | Camera | Vehicle | Count |
+|-------|----------|------------|-------|
+|08:00|Camera 01|Car|52|
+|08:00|Camera 01|Motorcycle|183|
+
+---
+
+## 4. ETL Pipeline
+
+Transforms raw detections into dimensional data.
+
+Creates:
+
+- Time Dimension
+- Camera Dimension
+- Vehicle Dimension
+- Fact Traffic
+
+---
+
+## 5. Data Warehouse
+
+Loads transformed data into PostgreSQL.
+
+Supports analytical queries efficiently through Star Schema.
+
+---
+
+## 6. Analytics
+
+SQL queries answer business questions such as:
+
+- What is the busiest road?
+- What is the peak traffic hour?
+- Which vehicle dominates the traffic?
+- How does traffic change throughout the week?
+
+---
+
+# 📊 Power BI Dashboard
+
+## Main Dashboard
+
+```
+docs/Main Dashboard.png
+```
+
+Features:
+
+- KPI Cards
+- Interactive Filters
+- Traffic Trend
+- Vehicle Composition
+- Traffic by Road
+- Dynamic Tooltips
+- Drillthrough Analysis
+
+---
+
+## Road Detail Dashboard
+
+```
+docs/Drill Trough Dashboard.png
+```
+
+Features
+
+- Road-specific analysis
+- Hourly trend
+- Vehicle composition
+- Raw transaction table
+
+---
+
+# 📈 Dashboard KPIs
+
+The dashboard displays:
+
+- Total Traffic Volume
+- Average Traffic
+- Total Cameras
+- Vehicle Categories
+- Peak Hour
+- Busiest Road
+- Dominant Vehicle Type
+
+---
+
+# 💡 Key Insights
+
+> **The following insights are generated from dummy/simulated data and are intended to demonstrate analytical capabilities.**
+
+### Peak Hour
+
+Traffic volume reaches its highest point at **18:00**, indicating the evening rush hour.
+
+---
+
+### Dominant Vehicle
+
+Motorcycles contribute approximately **60%** of the total traffic volume.
+
+---
+
+### Busiest Road
+
+**Simpang Lima** records the highest traffic volume among all monitored locations.
+
+---
+
+### Weekly Trend
+
+Traffic is consistently higher on weekdays than on weekends.
+
+---
+
+### Vehicle Composition
+
+Passenger vehicles (Cars and Motorcycles) account for over **90%** of total detected vehicles.
+
+---
+
+# 🔍 Business Questions
+
+This dashboard helps answer questions such as:
+
+- Which road experiences the highest traffic volume?
+- What is the busiest hour of the day?
+- Which vehicle type dominates traffic?
+- How does traffic vary by weekday?
+- Which camera records the most vehicles?
+
+---
+
+# 📦 Installation
+
+Clone the repository
+
+```bash
+git clone https://github.com/yourusername/TrafficAnalyticsPipeline.git
+
+cd TrafficAnalyticsPipeline
+```
+
+Install dependencies
+
 ```bash
 pip install -r requirements.txt
 ```
-*(Key dependencies include: `ultralytics`, `opencv-python`, `pandas`, `sqlalchemy`, `psycopg2-binary`)*
 
-2. Add your raw video files to `data/raw/`.
+Place traffic videos inside
 
-3. Run the complete pipeline:
+```
+data/raw/
+```
+
+Run the pipeline
+
 ```bash
 python src/main.py
 ```
 
-## Dashboard & Insights
-The PostgreSQL database is connected to **Power BI** to create interactive dashboards based on the star schema. 
+---
 
-### Power BI Dashboard
-*(TIPS: Letakkan screenshot dashboard Power BI Anda di folder `outputs/` atau `docs/`, lalu panggil gambarnya di sini. Contoh:)*
-<!-- ![Power BI Dashboard](outputs/dashboard_screenshot.png) -->
+# 📁 Output
 
-### Key Insights
-*(TIPS: Anda bisa menambahkan 3-4 poin temuan utama dari data analitik di sini)*
-- **Peak Hours:** Waktu puncak volume kendaraan tertinggi terjadi pada pukul ...
-- **Vehicle Types:** Mayoritas kendaraan yang melintas adalah jenis ... dengan persentase sebesar ...%
-- **Busiest Camera/Road:** Lokasi dengan traffic tertinggi terpantau pada ...
+The pipeline generates:
 
-## Future Improvement
-- Real-time video stream processing.
-- Advanced vehicle re-identification across multiple cameras.
-- Deployment to other cloud data warehouses (e.g., Snowflake, Redshift, or BigQuery).
+```
+Annotated Video
+
+↓
+
+Detection CSV
+
+↓
+
+PostgreSQL Database
+
+↓
+
+Power BI Dashboard
+```
+
+---
+
+# 🚀 Future Improvements
+
+- Real-time video stream processing
+- Apache Kafka integration
+- Apache Airflow orchestration
+- Docker deployment
+- Cloud deployment
+- Multi-camera tracking
+- Automatic dashboard refresh
+- GPS-enabled traffic mapping
+
+---
+
+# 👨‍💻 Author
+
+**Muhammad Dzaky Mu'ammar**
+
+Bachelor of Informatics
+
+Diponegoro University
+
+GitHub:
+https://github.com/dzakmu
+
+LinkedIn:
+(Add your LinkedIn)
+
+---
+
+# 📄 License
+
+This project is licensed under the MIT License.
