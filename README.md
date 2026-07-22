@@ -185,7 +185,7 @@ SQL queries answer business questions such as:
 ## Main Dashboard
 
 ```
-<img width="1197" height="672" alt="Main Dashboard" src="https://github.com/user-attachments/assets/54f6a1f6-5e2b-417c-aea4-c4331f240b53" />
+<img width="1197" height="672" alt="Main Dashboard" src="https://github.com/user-attachments/assets/bfcc18f0-3c0b-4334-98d0-a586f6dffae4" />
 
 ```
 
