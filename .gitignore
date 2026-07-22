@@ -1,0 +1,22 @@
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environments
+env/
+.venv/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# Project specific
+data/raw/*.mp4
+data/processed/*.csv
+outputs/*.mp4
+outputs/*.avi
+outputs/*.sql
+*.pt
+
+# Environment variables
+.env
